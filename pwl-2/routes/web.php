@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::View('/roles', 'role')->name('role')->middleware(['role:pustakawan']);
-});
+    Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
+    Route::get('/books', 'BookController@index')->name('book');
+    Route::get('/books', [BookController::class, 'index'])->name('book');
+    Route::post('/books', [BookController::class, 'store'])->name('book.store');
 
+});
 
 require __DIR__.'/auth.php';
