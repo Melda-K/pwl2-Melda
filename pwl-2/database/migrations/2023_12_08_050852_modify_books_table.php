@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::table('books', function (Blueprint $table) {
             $table->integer('quantity')->after('cover');
+            $table->string('author', 150)->change();
+            $table->string('publisher', 100)->change();
+            $table->string('city', 75)->change();
+
         });
     }
 
@@ -22,7 +26,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('books', function (Blueprint $table) {
-            //
+            $table->dropColumn('quantity');
+            $table->string('author')->change();
+            $table->string('publisher')->change();
+            $table->string('city')->change();
         });
     }
 };
