@@ -56,4 +56,12 @@ class BookController extends Controller
             return redirect()->route('book.create')->with($notification);
         }
     }
+
+    public function print_books()
+    {
+        $books = Book::all();
+
+        $pdf = PDF::loadview('books.print', ['books' => $books]); 
+        return $pdf->download('data_buku.pdf'); 
+    }
 }
